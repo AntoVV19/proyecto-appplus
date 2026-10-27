@@ -1,9 +1,9 @@
 # appplus.py - v1.0
 def mostrar_menu():
     print("\n--SISTEMA DE GESTIÓN DE TAREAS V1.0--")
-    print("1. Agregar tarea con prioridad")
+    print("1. Agregar tarea")
     print("2. Listar tareas")
-    print("3. Eliminar tarea")
+    print("3. Exportar tareas a TXT")
     print("4. Salir")
 
 
@@ -15,25 +15,19 @@ def main():
 
         if opcion == "1":
             tarea = input("Ingrese la descripción de la tarea: ")
-            prioridad = input("Ingrese prioridad (Alta/Media/Baja): ")
-            tareas.append({"desc": tarea, "prio": prioridad})
-            print("Tarea registrada correctamente.")
+            tarea.append(tarea)
+            print("Tarea agregada con exito.")
 
         elif opcion == "2":
             print("\n--Lista de Tareas--")
             for idx, t in enumerate(tareas, 1):
-                print(f"{idx}. [{t['prio']}] {t['desc']}")
+                print(f"{idx}.{t}")
 
         elif opcion == "3":
-            try:
-                idx = int(input("Número de tarea a eliminar: ")) - 1
-                if 0 <= idx < len(tareas):
-                    eliminada = tareas.pop(idx)
-                    print(f"Tarea '{eliminada['desc']}' eliminada.")
-                else:
-                    print("Índice no válido.")
-            except ValueError:
-                print("Por favor, ingresa un número válido.")
+          with open("tareas.txt", "w") as f:
+                for t in tareas:
+                    f.write(f"{t}\n")
+                    print("Tareas exportadas a 'tareas.txt'.")
 
         elif opcion == "4":
             print("Saliendo del sistema...")
@@ -45,3 +39,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
